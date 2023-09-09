@@ -1,6 +1,8 @@
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+
 export const RegisterForm = () => {
     return (
-        <form className="font-sans flex flex-col gap-[1vh] mt-[13vh]">
+        <form className="font-sans flex flex-col gap-[1vh] mt-[15vh] items-center">
             <label htmlFor="Apelido">
                 <input className="input" placeholder="Apelido"></input>
             </label>
@@ -13,13 +15,13 @@ export const RegisterForm = () => {
             </label>
 
         <div className="flex flex-col gap-[2vh] mt-[5vh]">
-            <p className="register-text w-[90vw]">
-                Ao continuar, você concorda com o nosso Contrato de usuário e nossa Política de Privacidade
+            <p className="text-[14px] w-[90vw]">
+                Ao continuar, você concorda com o nosso <span className='register-docs'>Contrato de usuário</span> e nossa <span className='register-docs'>Política de Privacidade</span>.
             </p>
-            <p className="register-text w-[80vw] ml-[6vw]">
-               <checkbox></checkbox> Eu concordo em receber emails sobre coisas legais no Labeddit
+            <p className="w-[80vw] ml-[6vw]">
+            <Checkbox><span className="text-[14px] relative left-[2vw]">Eu concordo em receber emails sobre coisas legais no Labeddit.</span></Checkbox> 
             </p>
-            <button className="button text-white bg-gradient-to-r  from-[#FF6489] to-[#F9B24E]">
+            <button className="button mt-[4vh] text-white bg-gradient-to-r  from-[#FF6489] to-[#F9B24E]">
                 Cadastrar
             </button>
         </div>

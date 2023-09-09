@@ -1,6 +1,6 @@
 export const LoginForm = () => {
     return (
-        <form className="font-sans flex flex-col gap-[1vh] mt-[13vh]">
+        <form className="font-sans flex flex-col gap-[1vh] mt-[13vh]  items-center">
             <label htmlFor="E-mail">
                 <input className="input" placeholder="E-mail"></input>
             </label>
