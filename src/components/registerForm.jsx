@@ -2,7 +2,7 @@ import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 
 export const RegisterForm = () => {
     return (
-        <form className="font-sans flex flex-col gap-[1vh] mt-[15vh] items-center">
+        <form className="font-sans flex flex-col gap-[1vh] mt-[15vh] w-[100vw] items-center">
             <label htmlFor="Apelido">
                 <input className="input" placeholder="Apelido"></input>
             </label>

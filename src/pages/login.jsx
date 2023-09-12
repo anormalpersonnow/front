@@ -1,10 +1,12 @@
 import { LoginForm } from '../components/loginForm'
+import HomeLogo from '../assets/homelogo.png'
 
-export const Home = () => {
+export const Login = () => {
     return (
         <>
         <div className="mt-[12vh] flex flex-col font-sans text-[16px] items-center ">
-        <span>O projeto de rede social da Labenu</span>
+            <img src={HomeLogo} alt="labeddit"/>
+            <span>O projeto de rede social da Labenu</span>
         </div>
         <LoginForm/>
         </>

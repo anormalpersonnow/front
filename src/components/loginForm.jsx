@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom"
+import { goToCadastro } from "../router/Coordinators"
+
 export const LoginForm = () => {
+
+    const navigate = useNavigate()
+
     return (
-        <form className="font-sans flex flex-col gap-[1vh] mt-[13vh]  items-center">
+        <form className="font-sans flex flex-col gap-[1vh] mt-[13vh] w-[100vw] items-center">
             <label htmlFor="E-mail">
                 <input className="input" placeholder="E-mail"></input>
             </label>
@@ -13,7 +19,7 @@ export const LoginForm = () => {
                 Continuar
             </button>
             <div className="home-line"/>
-            <button className="button border-[.5px] border-[#FE7E02]  text-[#FE7E02]">
+            <button onClick={() => goToCadastro(navigate)} className="button border-[.5px] border-[#FE7E02]  text-[#FE7E02]">
                 Crie uma conta!
             </button>
         </div>
