@@ -1,4 +1,5 @@
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { SignupRequest } from '../assets/Requests'
 
 export const RegisterForm = () => {
     return (

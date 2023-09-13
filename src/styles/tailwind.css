@@ -7,11 +7,6 @@
     @apply bg-white border-[.5px] border-gray-200 rounded-[5px] h-[60px] w-[363px] pl-[3vw]
 }
 
-.home-line{
-    @apply ml-[2vw] w-[85vw] h-[.1vh] bg-gradient-to-r  from-[#FF6489] to-[#F9B24E]
-
-}
-
 .button{
     @apply w-[90vw] h-[5vh] text-[18px] font-bold rounded-[10vw] active:scale-[.98]
 }
