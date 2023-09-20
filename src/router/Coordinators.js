@@ -1,13 +1,13 @@
 export const goToLogin = (navigate) => {
-    navigate("/login")
+    navigate("/")
 }
 
-export const goToCadastro = (navigate) => {
-    navigate("/cadastro")
+export const goToSignup= (navigate) => {
+    navigate("/signup")
 }
 
 export const goToForum = (navigate) => {
-    navigate("/")
+    navigate("/forum")
 }
 
 

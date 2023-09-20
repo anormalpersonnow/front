@@ -1,21 +1,36 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "../pages/login";
-import { Register } from "../pages/register";
+import { Signup } from "../pages/signup";
 import { Forum } from "../pages/forum";
+import { useEffect, useState } from 'react'
 
 export default function Router() {
+
+    const [isLogged, setIsLogged] = useState("")
+    const [token, setToken] = useState("")
+
+    useEffect(() => {
+        const getLog = localStorage.getItem("isLogged")
+        const getToken = localStorage.getItem("token")
+        if (getLog && getToken) {
+            setIsLogged(getLog)
+            setToken(getToken)
+        }
+    }, [])
+
+    const states = [isLogged, setIsLogged, token, setToken]
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={
-                    <Forum/>}
+                    <Login states={states} />}
                 />
-                <Route path="/login" element={
-                    <Login/>}
+                <Route path="/forum" element={
+                    <Forum states={states} />}
                 />
-                <Route path="/cadastro" element={
-                    <Register/>}
+                <Route path="/signup" element={
+                    <Signup states={states} />}
                 />
             </Routes>
         </BrowserRouter>
