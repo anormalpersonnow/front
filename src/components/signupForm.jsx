@@ -1,9 +1,10 @@
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
-import { useRegister } from '../assets/scripts/Hooks'
+import { Checkbox } from '@chakra-ui/react'
+import { useSignup } from '../assets/scripts/Hooks'
+import { SignupRequest } from '../assets/scripts/SignupRequest'
 
 export const SignUpForm = () => {
 
-    const [form, setForm]= useRegister({username: "", email: "", password: ""})
+    const [form, setForm]= useSignup({username: "", email: "", password: ""})
     
     return (
         <form className="font-sans flex flex-col gap-[1vh] mt-[15vh] w-[100vw] items-center">

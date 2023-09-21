@@ -10,8 +10,18 @@ export const SignupRequest = async (username, email, password, setFlow) => {
                 password: password
             })
              if(response) {
-                localStorage.setItem("token", response.data.token)
-                setFlow(1)
+                localStorage.setItem("user", {
+                    id: response.data.id,
+                    username: response.data.username,
+                    email: response.data.email,
+                    role: response.data.role,
+                    token: response.data.token
+                }
+                    ),
+                localStorage.setItem("logStatus", "logged"),
+                setTimeout(() => {
+                    setFlow(1)
+                    }, 1500)
              }
     } catch (error) {
         alert(error.message);

@@ -13,7 +13,7 @@ export const useLogin = () => {
 
 }
 
-export const useRegister = () => {
+export const useSignup = () => {
     
     const [form, setForm] = useState({username: "", email: "", password: ""})
 

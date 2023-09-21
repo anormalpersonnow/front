@@ -8,9 +8,11 @@ export default function Router() {
 
     const [isLogged, setIsLogged] = useState("")
     const [token, setToken] = useState("")
+    const [user, setUser] = useState([{}])
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        const getLog = localStorage.getItem("isLogged")
+        const getLog = localStorage.getItem("logStatus")
         const getToken = localStorage.getItem("token")
         if (getLog && getToken) {
             setIsLogged(getLog)
@@ -18,6 +20,7 @@ export default function Router() {
         }
     }, [])
 
+    const content = [user, setUser, posts, setPosts]
     const states = [isLogged, setIsLogged, token, setToken]
 
     return (
@@ -27,7 +30,9 @@ export default function Router() {
                     <Login states={states} />}
                 />
                 <Route path="/forum" element={
-                    <Forum states={states} />}
+                    <Forum states={states} 
+                           content={content}
+                    />}
                 />
                 <Route path="/signup" element={
                     <Signup states={states} />}

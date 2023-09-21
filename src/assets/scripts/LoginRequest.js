@@ -10,13 +10,18 @@ export const LoginRequest = async (email, password, setLog, navigate) => {
                 password: password
             })
              if(response) {
-                console.log(response.data)
-                localStorage.setItem("token", response.data.token),
-                localStorage.setItem("isLogged", "logged")
+                localStorage.setItem("user", {
+                    id: response.data.id,
+                    username: response.data.username,
+                    email: response.data.email,
+                    role: response.data.role,
+                    token: response.data.token
+                }),
+                localStorage.setItem("logStatus", "logged")
                 setLog("logged")
                 setTimeout(() => {
                 goToForum(navigate)
-                }, 1500)
+                }, 1000)
              }
     } catch (error) {
         alert(error.message);
