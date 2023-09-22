@@ -18,3 +18,11 @@
 .header-text{
     @apply  font-bold text-[18px] cursor-pointer hover:underline text-[#4088CB] relative left-[35vw]
 }
+
+.icon{
+    @apply text-[#6F6F6F] cursor-pointer
+}
+
+.icons-case{
+    @apply flex items-center gap-[3vw] border-[1px] p-[1vw] rounded-[2vw]
+}

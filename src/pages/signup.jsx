@@ -21,7 +21,7 @@ export const Signup = (props) => {
         <>
             <MobileHeader
                 function={goToLogin}
-                states={props.states}
+                status={props.status}
             />
             {pageFlow === 0 ?
 

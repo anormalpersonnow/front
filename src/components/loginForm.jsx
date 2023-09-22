@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import { goToSignup } from "../router/Coordinators"
-import { LoginRequest } from "../assets/scripts/LoginRequest"
+import { LoginRequest } from "../assets/scripts/Users/LoginRequest"
 import { useLogin } from "../assets/scripts/Hooks"
 
 export const LoginForm = (props) => {
 
-    const [isLogged, setIsLogged] = props.states
-
     const navigate = useNavigate()
+    const [isLogged, setIsLogged] = props.status
     const [form, changeForm] = useLogin({email: "", password: ""})
 
     return (

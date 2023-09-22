@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom'
 
 export const MobileHeader = (props) => {
 
-    const [isLogged, setIsLogged, token, setToken] = props.states
+    const [isLogged, setIsLogged, token, setToken] = props.status
 
     const navigate = useNavigate()
 
     const logout = () => {
         localStorage.removeItem("isLogged")
         localStorage.removeItem("token")
+    setTimeout(() => {
         setIsLogged("")
         setToken("")
+    }, 1500)
     }
 
     return (
@@ -27,7 +29,9 @@ export const MobileHeader = (props) => {
                 </span>
                 :
                 <span
-                    onClick={() => props.function(navigate)}
+                    onClick={() => setTimeout(() => {
+                        props.function(navigate)
+                    }, 1000)}
                     className="header-text">
                     Entrar
                 </span>

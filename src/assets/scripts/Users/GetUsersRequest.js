@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const GetUsersRequest = async (username, token, setArray) => {
+export const GetUsers = async (username, token, array, setArray) => {
 
     try {
         let response;
@@ -18,6 +18,7 @@ export const GetUsersRequest = async (username, token, setArray) => {
         }
         if (response) {
             setArray(response.data)
+            .then(localStorage.setItem("user", array))
         }
     } catch (error) {
         alert(error.message);

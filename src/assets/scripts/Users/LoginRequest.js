@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { goToForum } from '../../router/Coordinators'
+import { goToForum } from '../../../router/Coordinators'
 
-export const LoginRequest = async (email, password, setLog, navigate) => {
+export const LoginRequest = async (email, password, navigate) => {
 
     try {
         const response = await axios.post("http://127.0.0.1:3003/users/login",
@@ -10,15 +10,14 @@ export const LoginRequest = async (email, password, setLog, navigate) => {
                 password: password
             })
              if(response) {
-                localStorage.setItem("user", {
+                localStorage.setItem("user", JSON.stringify({
                     id: response.data.id,
                     username: response.data.username,
                     email: response.data.email,
                     role: response.data.role,
                     token: response.data.token
-                }),
-                localStorage.setItem("logStatus", "logged")
-                setLog("logged")
+                })),
+                localStorage.setItem("logStatus", "logged"),
                 setTimeout(() => {
                 goToForum(navigate)
                 }, 1000)

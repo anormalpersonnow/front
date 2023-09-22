@@ -1,6 +1,6 @@
 import { Checkbox } from '@chakra-ui/react'
 import { useSignup } from '../assets/scripts/Hooks'
-import { SignupRequest } from '../assets/scripts/SignupRequest'
+import { SignupRequest } from '../assets/scripts/Users/SignupRequest'
 
 export const SignUpForm = () => {
 

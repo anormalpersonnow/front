@@ -10,7 +10,7 @@ export const Login = (props) => {
                 <span>O projeto de rede social da Labenu</span>
             </div>
             <LoginForm 
-                states={props.states}
+                status={props.status}
             />
         </>
     )

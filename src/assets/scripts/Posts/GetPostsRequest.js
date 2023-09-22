@@ -1,9 +1,10 @@
 import axios from 'axios'
 
-export const GetPostsRequest = async (content, token, setArray) => {
+export const GetPosts = async (content, token, array, setArray) => {
 
     try {
         let response;
+
         if (content) {
             response = await axios.get("http://127.0.0.1:3003/posts/",
                 {
@@ -18,8 +19,9 @@ export const GetPostsRequest = async (content, token, setArray) => {
         }
         if (response) {
             setArray(response.data)
+            localStorage.setItem("posts", JSON.stringify(array))
         }
     } catch (error) {
-        alert(error.message);
+        console.log(error);
     }
 }
