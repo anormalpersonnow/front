@@ -1,26 +1,32 @@
 import axios from 'axios'
 
-export const GetUsers = async (username, token, array, setArray) => {
+export const GetUsers = async (username, token, state, setState) => {
 
     try {
         let response;
         if (username) {
             response = await axios.get("http://127.0.0.1:3003/users/",
                 {
-                    username: username,
-                    token: token
+                    username: username
+                },
+                {
+                    headers: {
+                        Authorization: token
+                    }
                 })
         } else {
             response = await axios.get("http://127.0.0.1:3003/users/",
                 {
-                    token: token
+                    headers: {
+                        Authorization: token
+                    }
                 })
         }
         if (response) {
-            setArray(response.data)
-            .then(localStorage.setItem("user", array))
+            setState(response.data)
+                .then(localStorage.setItem("user", state))
         }
     } catch (error) {
-        alert(error.message);
+        alert(error.response.data);
     }
 }

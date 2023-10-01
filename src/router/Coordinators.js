@@ -10,4 +10,7 @@ export const goToForum = (navigate) => {
     navigate("/forum")
 }
 
+export const goToPost = (navigate, url) => {
+    navigate(`/forum/post/${url}`)
+}
 

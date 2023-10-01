@@ -1,4 +1,4 @@
-import { SignUpForm } from '../components/signupForm'
+import { SignUpForm } from '../components/forms/signupForm'
 import { MobileHeader } from '../components/mobileHeader'
 import { goToLogin } from '../router/Coordinators'
 import { goToForum } from '../router/Coordinators'
@@ -8,9 +8,9 @@ import loading from '../assets/images/loading.gif'
 
 export const Signup = (props) => {
 
-    const [pageFlow, setPageFlow] = useState(1)
+    const [user, setUser] = props.content
+    const [pageFlow, setPageFlow] = useState(0)
     const navigate = useNavigate()
-
     const timeOut = () => {
         setTimeout(() => {
             goToForum(navigate)
@@ -21,16 +21,17 @@ export const Signup = (props) => {
         <>
             <MobileHeader
                 function={goToLogin}
-                status={props.status}
+                content={props.content}
             />
             {pageFlow === 0 ?
 
                 <>
-                    <div className="mt-[5vh] flex flex-col font-sans text-[16px] items-center ">
+                    <div className="mt-[8vh] flex flex-col font-sans text-[16px] items-center ">
                         <p className=" w-[75vw] text-[32px] font-bold text-[#373737]">Olá, boas vindas ao LabEddit ;)</p>
                     </div>
                     <SignUpForm
-                        setPageFlow={setPageFlow} />
+                        setPageFlow={setPageFlow}
+                        setUser={setUser} />
                 </>
                 :
 

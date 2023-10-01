@@ -1,4 +1,4 @@
-import { LoginForm } from '../components/loginForm'
+import { LoginForm } from '../components/forms/loginForm'
 import HomeLogo from '../assets/images/homelogo.png'
 
 export const Login = (props) => {
@@ -9,9 +9,9 @@ export const Login = (props) => {
                 <img src={HomeLogo} alt="labeddit" />
                 <span>O projeto de rede social da Labenu</span>
             </div>
-            <LoginForm 
-                status={props.status}
-            />
+            <LoginForm
+                setUser={props.setUser}
+                />
         </>
     )
 }
