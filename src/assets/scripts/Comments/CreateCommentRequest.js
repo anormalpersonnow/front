@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-export const createPost = async (content, token, array, setArray) => {
+export const createComment = async (content, postId, token, array, setArray) => {
 
     try {
-        const response = await axios.post("http://127.0.0.1:3003/posts/",
+        const response = await axios.post("http://127.0.0.1:3003/comments/",
             {
+                postId: postId,
                 content: content
             },
             {

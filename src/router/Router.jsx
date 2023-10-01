@@ -1,59 +1,95 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import { Login } from "../pages/login";
-import { Signup } from "../pages/signup";
 import { Forum } from "../pages/forum";
-import {
-    States,
-    getLogState,
-    getUserState,
-    getTokenState,
-    getPostsState,
-    getCommentsState
-} from "../assets/scripts/States";
-import { useEffect } from 'react'
+import { PostPage } from "../pages/post"
+import { Signup } from "../pages/signup";
+import { NotFound } from "../pages/notFound";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { getPosts } from "../assets/scripts/Posts/GetPostsRequest";
+import { states, getUserState } from "../assets/scripts/Functions";
+import { getComments } from "../assets/scripts/Comments/GetCommentsRequest";
+
 
 export default function Router() {
 
 
-    const [isLogged, setIsLogged, token, setToken, user, setUser, posts, setPosts, comments, setComments] = States()
-
-    useEffect(() => { getLogState(setIsLogged) }, [])
+    const [user, setUser, posts, setPosts, comments, setComments, textArea, setTextArea] = states()
+    const token = user.token
+    
     useEffect(() => { getUserState(setUser) }, [])
-    useEffect(() => { getTokenState(setToken) }, [])
-    useEffect(() => { getPostsState(setPosts) }, [])
-    useEffect(() => { getCommentsState(setComments) }, [])
 
-    const content = [user, setUser, posts, setPosts, comments, setComments]
-    const status = [isLogged, setIsLogged, token, setToken]
+    const reversedPosts = posts.reverse()
+    const urlsList = reversedPosts.map(post => post.id.slice(0, 8))
 
+    useEffect(() => {
+        if (user.isLogged) {
+            getPosts("", user.token, setPosts)
+            getComments("", user.token, setComments)
+        }
+    }, [token]
+
+    )
+
+    const userContent = [user, setUser]
+    const postContent = [user, posts, setPosts, textArea, setTextArea]
+    const commentComtent = [user, comments, setComments, textArea, setTextArea]
 
     return (
         <BrowserRouter>
             <Routes>
+
                 <Route path="/" element={
-                    !isLogged ?
-                        <Login status={status} />
+                    !user.isLogged ?
+                        <Login
+                            setUser={setUser} />
                         :
                         <Forum
-                            status={status}
-                            content={content}
+                            content={postContent}
+                            reversedPosts={reversedPosts}
                         />}
                 />
+
+                <Route path="/signup" element={
+                    !user.isLogged ?
+                        <Signup
+                            content={userContent} />
+                        :
+                        <Forum
+                            content={postContent}
+                            reversedPosts={reversedPosts}
+                        />}
+                />
+
                 <Route path="/forum" element={
                     <Forum
-                        status={status}
-                        content={content}
+                        content={postContent}
+                        reversedPosts={reversedPosts}
                     />}
                 />
-                <Route path="/signup" element={
-                    !isLogged ?
-                    <Signup status={status} />
-                    :
-                    <Forum
-                        status={status}
-                        content={content}
-                    />}
-                />
+
+                {urlsList.map((url, index) => {
+                    return (
+                        <>
+                            <Route
+                                key={url}
+                                path={`/forum/post/${url}`}
+                                element={
+                                    user.isLogged ?
+                                        <PostPage
+                                            key={index}
+                                            url={url}
+                                            content={commentComtent}
+                                            posts={posts}
+                                        />
+                                        :
+                                        <NotFound 
+                                        />
+                                }
+                            />
+                        </>
+                    )
+                })}
+
             </Routes>
         </BrowserRouter>
     )

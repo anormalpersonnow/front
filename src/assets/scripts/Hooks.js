@@ -1,26 +1,27 @@
 import { useState } from "react"
 
-export const useLogin = () => {
-    
-    const [form, setForm] = useState({email: "", password: ""})
+export const useForm = () => {
+
+    const [form, setForm] = useState({ username: "", email: "", password: "" })
 
     const changeForm = (event) => {
-		const {name, value} = event.target
-        setForm({...form, [name]: value});
+        const { name, value } = event.target
+        setForm({ ...form, [name]: value });
     }
 
     return [form, changeForm]
 
 }
 
-export const useSignup = () => {
-    
-    const [form, setForm] = useState({username: "", email: "", password: ""})
+export const usePassword = () => {
 
-    const changeForm = (event) => {
-		const {name, value} = event.target
-        setForm({...form, [name]: value});
+    const [type, setType] = useState("password")
+
+    const changeType = () => {
+        type === "password" ?
+            setType("text")
+            : setType("password")
     }
 
-    return [form, changeForm]
+    return [type, changeType]
 }

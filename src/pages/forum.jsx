@@ -1,76 +1,62 @@
 import { useState, useEffect } from 'react'
-import { MobileHeader } from '../components/mobileHeader'
+import { useNavigate } from 'react-router-dom'
 import { goToLogin } from '../router/Coordinators'
-import { GetPosts } from '../assets/scripts/Posts/GetPostsRequest'
-import { PostsCase } from '../components/postsCase'
-import { CreatePost } from '../assets/scripts/Posts/CreatePostRequest'
-import { Textarea } from '@chakra-ui/react'
+import { posting } from '../assets/scripts/Functions'
+import { MobileHeader } from '../components/mobileHeader'
+import { PostsCase } from '../components/cases/postsCase'
+import { TextArea, ReadOnlyTextArea } from '../components/textArea'
+import { createPost } from '../assets/scripts/Posts/CreatePostRequest'
+
 
 export const Forum = (props) => {
 
-    const [isLogged, setIsLogged, token, setToken] = props.status
-    const [user, setUser, posts, setPosts, comments, setComments] = props.content
-    const [postContent, setPostContent] = useState("")
-    const [commentContent, setCommentContent] = useState("")
-
-    const posting = () => {
-        CreatePost(postContent, token, posts, setPosts)
-        setPostContent("")
-    }
+    const navigate = useNavigate()
+    const [user, posts, setPosts, textArea, setTextArea] = props.content
+    const token = user.token
 
     return (
-        <>
+        < div className="flex flex-col justify-center pb-[4vh]">
             <MobileHeader
                 function={goToLogin}
-                status={props.status}
+                isLogged={user.isLogged}
+                content={props.content}
             />
 
             <div className="mt-[5vh] flex flex-col font-sans text-[16px] items-center ">
                 <form className="flex flex-col">
-                    {isLogged ?
-                        <Textarea
-                            name="content"
-                            placeholder="Escreva seu post..."
-                            value={postContent}
-                            onChange={(e) => setPostContent(e.target.value)}
-                            w={"88vw"}
-                            h={'20vh'}
-                            size={'md'}
-                            color={'#646262'}
-                            bg={"#EDEDED"}
-                            focusBorderColor='#EDEDED'
-                        />
+                    {user.isLogged ?
+
+                        <TextArea
+                            value={textArea.post}
+                            state={textArea}
+                            setState={setTextArea}
+                            function={() => posting(createPost, textArea.post, token, posts, setPosts, setTextArea)} />
                         :
-                        <Textarea
-                            name="content"
-                            isReadOnly
-                            placeholder="Faça login para começar a postar..."
-                            w={"88vw"}
-                            h={'20vh'}
-                            size={'md'}
-                            bg={"#EDEDED"}
-                        />
+                        <ReadOnlyTextArea />
                     }
-                    <button
-                        className="w-[88vw] h-[5vh] text-[18px] font-bold 
-                        rounded-[2vw] active:scale-[.98] mt-[4vh] text-white 
-                        bg-gradient-to-r  from-[#FF6489] to-[#F9B24E]"
-                        type="button"
-                        onClick={() => posting()}>
-                        Postar
-                    </button>
+
                 </form>
             </div>
 
-            <div className="ml-[6vw] w-[88vw] h-[.2vh] bg-gradient-to-r  
-            from-[#FF6489] to-[#F9B24E] mt-[4vh]" />
+            <div className="ml-[4.5vw] w-[85vw] h-[.2vh] bg-gradient-to-r  
+            from-[#FF6489] to-[#F9B24E] mt-[3vh]" />
 
-            <PostsCase
-                posts={posts}
-                setPosts={setPosts}
-                user={user}
-                token={token}
-            />
-        </>
+            {user.isLogged ?
+
+                <PostsCase
+                    reversedPosts={props.reversedPosts}
+                    setPosts={setPosts}
+                    role={user.role}
+                    userId={user.id}
+                    token={user.token}
+                />
+                :
+                <div className=" flex justify-center mt-[5vh] text-[14.5px]">
+                    <p>
+                        Por favor, <span className="cursor-pointer hover:underline" onClick={() => goToLogin(navigate)}>faça login</span> para visualizar as postagens.
+                    </p>
+                </div>
+            }
+        </div>
     )
 }

@@ -1,29 +1,21 @@
 import HeaderLogo from '../assets/images/headerlogo.png'
+import { logout } from '../assets/scripts/Functions'
 import { useNavigate } from 'react-router-dom'
 
 export const MobileHeader = (props) => {
 
-    const [isLogged, setIsLogged, token, setToken] = props.status
-
     const navigate = useNavigate()
-
-    const logout = () => {
-        localStorage.removeItem("isLogged")
-        localStorage.removeItem("token")
-    setTimeout(() => {
-        setIsLogged("")
-        setToken("")
-    }, 1500)
-    }
+    const [user, setUser] = props.content
 
     return (
-        <div className="bg-[#EDEDED] w-[100vw] h-[7vh] flex items-center justify-center">
+        <div className="bg-[#EDEDED] w-[100vw] 
+        h-[7vh] flex items-center justify-center">
 
             <img className="relative left-[2vw]" src={HeaderLogo} />
 
-            {isLogged ?
+            {user.isLogged ?
                 <span
-                    onClick={() => logout()}
+                    onClick={() => logout(user, setUser, navigate)}
                     className="header-text">
                     Logout
                 </span>
